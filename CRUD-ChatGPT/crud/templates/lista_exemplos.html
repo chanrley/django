@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Exemplos</h1>
+    <a href="{% url 'novo_exemplo' %}">Novo exemplo</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Campo 1</th>
+                <th>Campo 2</th>
+                <th>Campo 3</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for exemplo in exemplos %}
+                <tr>
+                    <td>{{ exemplo.campo1 }}</td>
+                    <td>{{ exemplo.campo2 }}</td>
+                    <td>{{ exemplo.campo3 }}</td>
+                    <td>
+                        <a href="{% url 'edita_exemplo' exemplo.id %}">Editar</a>
+                        <a href="{% url 'remove_exemplo' exemplo.id %}">Remover</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
