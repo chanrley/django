@@ -1,0 +1,161 @@
+page 
+30 / 57
+
+When you have to deal with multiple environments that require different configurations,
+you can create a different settings file for each environment.
+Example:
+python manage.py runserver 127.0.0.1:8001 --settings=mysite.settings
+
+
+######################################################################
+#ADICIONAR INDEXES AOS CAMPOS PESQUISÁVEIS DO PROJETO NOVO PORTAL DVA#
+######################################################################
+
+######################################################################
+Esse exemplo pode ser utilizado para os níveis de acesso da aplicação#
+######################################################################
+Since the case where the enum values need to be integers is extremely common, Django provides an IntegerChoices class. For example:
+
+class Card(models.Model):
+
+    class Suit(models.IntegerChoices):
+        DIAMOND = 1
+        SPADE = 2
+        HEART = 3
+        CLUB = 4
+
+    suit = models.IntegerField(choices=Suit.choices)
+######################################################################
+
+#############################################
+#Adicionar busca conforme exemplo do Author:#
+#############################################
+Also, the author field is now displayed with a lookup widget, which can be much better than a dropdown select input when you have thousands of users. This is achieved with the raw_id_fields attribute
+and it looks like this:(ex: page 56)
+#######################################################################################################################################################################################################
+
+******************************************************************************************************
+#############                                                                                           
+#IMPORTANTE:#
+#############
+Remember that you can define the database of your project in the DATABASES setting of your project’s
+settings.py file. Django can work with multiple databases at a time, and you can program database
+routers to create custom data routing schemes.
+*****************************************************************************************************
+
+04/04/23
+
+COMANDOS:
+    Shell do Python/Django:
+    python manage.py shell
+
+06/04/23
+pag 57
+
+python manage.py shell
+Then, type the following lines:
+>>> from django.contrib.auth.models import User
+>>> from blog.models import Post
+>>> user = User.objects.get(username='admin')
+>>> post = Post(title='Another post',
+... slug='another-post',
+... body='Post body.',
+... author=user)
+>>> post.save()
+
+############################
+#Retrieving the user object# 
+#with the username admin:###
+############################
+user = User.objects.get(username='admin')
+
+#############################################
+#You can also create the object and persist##
+#it into the database in a single operation##
+#using the create() method, as follows:######
+#############################################
+Post.objects.create(title='One more post',
+ slug='one-more-post',
+ body='Post body.',
+ author=user)
+
+page 72
+07/04/23
+###########################################################
+#How to pass adicional context variables to the templates##
+###########################################################
+pag 81
+The {% include %} template tag loads the given template and renders it using the current template
+context. *** We use with to pass additional context variables to the template***. The pagination template
+uses the page variable to render, while the Page object that we pass from our view to the template is
+called posts. We use with page=posts to pass the variable expected by the pagination template. You
+can follow this method to use the pagination template for any type of object.
+
+page 86:
+Why use class-based views
+Class-based views offer some advantages over function-based views that are useful for specific use
+cases. Class-based views allow you to:
+• Organize code related to HTTP methods, such as GET, POST, or PUT, in separate methods, instead
+of using conditional branching
+• Use multiple inheritance to create reusable view classes (also known as mixins)
+
+page 93
+
+08/04/23
+
+################################
+Send e-mail with django page 95#
+################################
+
+Copy the generated app password.
+Edit the settings.py file of your project and add the app password to the EMAIL_HOST_PASSWORD
+setting, as follows:
+# Email server configuration
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'your_account@gmail.com'
+EMAIL_HOST_PASSWORD = 'xxxxxxxxxxxxxxxx'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+Open the Python shell by running the following command in the system shell prompt:
+python manage.py shell
+Execute the following code in the Python shell:
+>>> from django.core.mail import send_mail
+>>> send_mail('Django mail',
+... 'This e-mail was sent with Django.',
+... 'your_account@gmail.com',
+... ['your_account@gmail.com'],
+... fail_silently=False)
+The send_mail() function takes the subject, message, sender, and list of recipients as required arguments. By setting the optional argument fail_silently=False, we are telling it to raise an exception
+if the email cannot be sent. If the output you see is 1, then your email was successfully sent
+###################################
+#FUNCIONOU SOMENTE NO NOTE PESSOAL#
+###################################
+
+##########################################
+#FINALLY DISCOVERED WHAT IS AS_P IN FORMS#
+##########################################
+We have included the form instance with {{ form.as_p }}. We tell Django to render the form fields
+using HTML paragraph <p> elements by using the as_p method. We could also render the form as an
+unordered list with as_ul or as an HTML table with as_table. Another option is to render each field
+by iterating through the form fields, as in the following example:
+
+****************
+The save() method is available for ModelForm but not for Form instances since
+they are not linked to any model
+page 107
+
+08/04/23
+page 118
+
+
+
+
+
+
+
+
+
+
+
+
+
